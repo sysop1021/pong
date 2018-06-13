@@ -1,5 +1,4 @@
 /**
-    TODO: fix the ability to "spear" the ball with the paddle and prevent correct bouncing
     TODO: make a paddle AI that is actually beatable, instead of precisely real-time
         following the y-pos of the ball
     TODO: make a game won condition and start a new game
@@ -19,7 +18,6 @@
 */
 
 #include <SFML/Graphics.hpp>
-//#include <iostream> // not needed - using temporarily to use cout for testing
 #include <string> // need to manipulate int scores into strings for display
 #include <time.h> // needed to seed PRNG
 
@@ -39,7 +37,6 @@ int main(int argc, char* argv[])
     ballTex.loadFromFile("resources/ball.png");
 
     sf::Font font;
-
     font.loadFromFile("resources/Lato-Regular.ttf");
 
     sf::Text score("0 - 0", font);
@@ -83,11 +80,11 @@ int main(int argc, char* argv[])
             // handle player paddle movement
             if (event.type == sf::Event::MouseMoved)
             {
-                // if (sf::Mouse::getPosition(window).y >= (p1Tex.getSize().y / 2) && sf::Mouse::getPosition(window).y + (p1Tex.getSize().y / 2) <= window.getSize().y)
-                // Kinda works, but not quite
-                //{
+                if (sf::Mouse::getPosition(window).y >= (p1Tex.getSize().y / 2) && sf::Mouse::getPosition(window).y + (p1Tex.getSize().y / 2) <= window.getSize().y)
+                // Kinda works, but not quite. it's too sensitive to the mouse cursor leaving the bounds of the window
+                {
                     player_yPos = sf::Mouse::getPosition(window).y;
-                //}
+                }
             }
         }
 
@@ -123,25 +120,11 @@ int main(int argc, char* argv[])
             {
                 p2Score++;
             }
-
-            //std::cout << p1Score << " - " << p2Score << std::endl;
-
-            //score.setString(std::to_string(p1Score) + " - " + std::to_string(p2Score) + std::endl);
-            // not sure why the above line don't work, but the junk below does... ???
-
-            /**
-            BUG: std::to_string does not work with MinGW compiler - F:\Dev\pong\pong.cpp|107|error: 'to_string' is not a member of 'std'
-            compiles and runs with gcc on linux.
-
-            The fix per http://tehsausage.com/mingw-to-string
-            ...does not work - F:\Dev\pong\pong.cpp|112|error: no match for 'operator<<' (operand types are 'std::string {aka std::basic_string<char>}' and 'const char [4]')|
-
-            FIXED with the following workaround:
-            */
+            
+            // update scoreboard
             p1ScoreStr = std::to_string(p1Score);
             p2ScoreStr = std::to_string(p2Score);
             scoreStr = p1ScoreStr + " - " + p2ScoreStr;
-            /*************/
 
             score.setString(scoreStr);
         }
@@ -152,11 +135,10 @@ int main(int argc, char* argv[])
             ballSpeed.y *= -1;
         }
 
-        // collision detection and bounce off player paddles
-        if (ball.getGlobalBounds().intersects(p1.getGlobalBounds()) || ball.getGlobalBounds().intersects(p2.getGlobalBounds()))
+        // collision detection and bounce off player paddles with "spear prevention" based on if current ballspeed.x is pos or neg
+        if ((ball.getGlobalBounds().intersects(p1.getGlobalBounds()) && ballSpeed.x < 0) || (ball.getGlobalBounds().intersects(p2.getGlobalBounds()) && ballSpeed.x > 0))
         {
-            // except for collision with the top of the paddle.
-            ballSpeed.x *= -1;;
+            ballSpeed.x *= -1;
         }
 
         ball.move(ballSpeed);
@@ -164,3 +146,4 @@ int main(int argc, char* argv[])
     }
     return 0;
 }
+
