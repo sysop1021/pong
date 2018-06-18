@@ -3,6 +3,9 @@
         following the y-pos of the ball
     TODO: make a game won condition and start a new game
         (classic Pong is first to 11 - https://en.wikipedia.org/wiki/Pong#Gameplay)
+    TODO: fix ball speed and random direction stuff - speed should initially be
+        fixed, but direction should be random, including negative values
+
     TODO: ball speeds up with each volley - speed resets after point is scored
     TODO: ball waits for a moment after being reset and before launching (?)
     TODO: vary the reflection angle based on what part of the paddle is hit
@@ -15,10 +18,6 @@
 
     TODO: port to Android
 */
-
-
-// test change
-
 
 #include <SFML/Graphics.hpp>
 #include <string> // need to manipulate int scores into strings for display
@@ -83,8 +82,8 @@ int main(int argc, char* argv[])
             // handle player paddle movement
             if (event.type == sf::Event::MouseMoved)
             {
-                if (sf::Mouse::getPosition(window).y >= (p1Tex.getSize().y / 2) && sf::Mouse::getPosition(window).y + (p1Tex.getSize().y / 2) <= window.getSize().y)
                 // Kinda works, but not quite. it's too sensitive to the mouse cursor leaving the bounds of the window
+                if (sf::Mouse::getPosition(window).y >= (p1Tex.getSize().y / 2) && sf::Mouse::getPosition(window).y + (p1Tex.getSize().y / 2) <= window.getSize().y)
                 {
                     player_yPos = sf::Mouse::getPosition(window).y;
                 }
