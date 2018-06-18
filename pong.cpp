@@ -116,7 +116,11 @@ int main(int argc, char* argv[])
             {
                 p2Score++;
             }
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> origin/master
             // update scoreboard
             p1ScoreStr = std::to_string(p1Score);
             p2ScoreStr = std::to_string(p2Score);
