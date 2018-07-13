@@ -22,7 +22,8 @@
 #include <SFML/Graphics.hpp>
 #include <string> // need to manipulate int scores into strings for display
 #include <time.h> // needed to seed PRNG
-#include <iostream>
+
+#define MAX_SCORE 3 // needs to be 11 - making it 3 for faster testing
 
 int main(int argc, char* argv[])
 {
@@ -123,7 +124,7 @@ int main(int argc, char* argv[])
             }
 
             // update scoreboard
-            if (p1Score < 11 && p2Score < 11)
+            if (p1Score < MAX_SCORE && p2Score < MAX_SCORE)
             {
                 p1ScoreStr = std::to_string(p1Score);
                 p2ScoreStr = std::to_string(p2Score);
@@ -133,11 +134,9 @@ int main(int argc, char* argv[])
             }
 
             //GAME WON CONDITION CHECK
-            if (p1Score == 11 || p2Score == 11)
+            if (p1Score == MAX_SCORE || p2Score == MAX_SCORE)
             {
                 score.setString("GAME WON!!1");
-                //window.draw(score);
-                //std::cout << "game won" << std::endl;
                 gameWon = true;
             }
 
