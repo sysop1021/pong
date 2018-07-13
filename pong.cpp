@@ -89,7 +89,7 @@ int main(int argc, char* argv[])
                 }
             }
         }
-
+// START score loop
         window.clear();
 
         window.draw(bg);
@@ -121,11 +121,20 @@ int main(int argc, char* argv[])
             }
 
             // update scoreboard
-            p1ScoreStr = std::to_string(p1Score);
-            p2ScoreStr = std::to_string(p2Score);
-            scoreStr = p1ScoreStr + " - " + p2ScoreStr;
+            if (p1Score < 11 && p2Score < 11)
+            {
+                p1ScoreStr = std::to_string(p1Score);
+                p2ScoreStr = std::to_string(p2Score);
+                scoreStr = p1ScoreStr + " - " + p2ScoreStr;
 
-            score.setString(scoreStr);
+                score.setString(scoreStr);
+            }
+
+            //GAME WON CONDITION CHECK
+            if (p1Score == 11 || p2Score == 11)
+            {
+                score.setString("GAME WON!!1");
+            }
 
             // reset ball position and speed after score
             ball.setPosition(window.getSize().x / 2, window.getSize().y / 2);
@@ -147,7 +156,7 @@ int main(int argc, char* argv[])
         }
 
         ball.move(ballSpeed);
-
+// END SCORE CHECKING LOOP
     }
     return 0;
 }
