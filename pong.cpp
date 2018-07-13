@@ -22,6 +22,7 @@
 #include <SFML/Graphics.hpp>
 #include <string> // need to manipulate int scores into strings for display
 #include <time.h> // needed to seed PRNG
+#include <iostream>
 
 int main(int argc, char* argv[])
 {
@@ -30,6 +31,8 @@ int main(int argc, char* argv[])
 
     sf::RenderWindow window(sf::VideoMode(1024, 768), "Pong");
     window.setFramerateLimit(60);
+
+    bool gameWon = false;
 
     sf::Texture bgTex, p1Tex, p2Tex, ballTex;
 
@@ -89,7 +92,6 @@ int main(int argc, char* argv[])
                 }
             }
         }
-// START score loop
         window.clear();
 
         window.draw(bg);
@@ -134,6 +136,9 @@ int main(int argc, char* argv[])
             if (p1Score == 11 || p2Score == 11)
             {
                 score.setString("GAME WON!!1");
+                //window.draw(score);
+                //std::cout << "game won" << std::endl;
+                gameWon = true;
             }
 
             // reset ball position and speed after score
@@ -156,8 +161,8 @@ int main(int argc, char* argv[])
         }
 
         ball.move(ballSpeed);
-// END SCORE CHECKING LOOP
     }
+
     return 0;
 }
 
