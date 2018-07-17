@@ -105,7 +105,10 @@ int main(int argc, char* argv[])
         window.display();
 
         // handle paddle movement
-        p2.setPosition(window.getSize().x * 0.9f, player_yPos);
+        if(!gameWon)
+        {
+            p2.setPosition(window.getSize().x * 0.9f, player_yPos);
+        }
 
         // TODO: AI PADDLE MOVEMENT -  TEMPORARILY COMMENTED OUT TO GET SCORING ON BOTH SIDES
         //p1.setPosition(window.getSize().x * 0.1f, ball.getPosition().y);
@@ -124,7 +127,7 @@ int main(int argc, char* argv[])
             }
 
             // update scoreboard
-            if (p1Score < MAX_SCORE && p2Score < MAX_SCORE)
+            if (!gameWon)
             {
                 p1ScoreStr = std::to_string(p1Score);
                 p2ScoreStr = std::to_string(p2Score);
@@ -159,7 +162,10 @@ int main(int argc, char* argv[])
             ballSpeed.x *= -1;
         }
 
-        ball.move(ballSpeed);
+        if (!gameWon)
+        {
+            ball.move(ballSpeed);
+        }
     }
 
     return 0;
