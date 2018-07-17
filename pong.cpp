@@ -1,20 +1,20 @@
 /**
+    definitely:
     TODO: make a paddle AI that is actually beatable, instead of precisely real-time
         following the y-pos of the ball
-    TODO: start a new game after game over
     TODO: fix ball speed and random direction stuff - speed should initially be
         fixed, but direction should be random, including negative values
-
-    TODO: ball speeds up with each volley - speed resets after point is scored
-    TODO: ball waits for a moment after being reset and before launching (?)
     TODO: vary the reflection angle based on what part of the paddle is hit
     TODO: sound - "boink" noise on bounce
+
+    maybe:
+    TODO: ball speeds up with each volley - speed resets after point is scored
+    TODO: ball waits for a moment after being reset and before launching (?)
     TODO: GOOD GRAFIKS - https://www.youtube.com/watch?v=Z_o6DxhslAI
     TODO: implement framestep (per Game Programming Patterns - Game Loop chapter)
             http://gameprogrammingpatterns.com/game-loop.html#run,-run-as-fast-as-you-can
-
+    TODO: start a new game after game over
     TODO: refactor - OOP nonsense and seperate files
-
     TODO: port to Android
 */
 
