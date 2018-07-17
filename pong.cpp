@@ -1,8 +1,7 @@
 /**
     TODO: make a paddle AI that is actually beatable, instead of precisely real-time
         following the y-pos of the ball
-    TODO: make a game won condition and start a new game
-        (classic Pong is first to 11 - https://en.wikipedia.org/wiki/Pong#Gameplay)
+    TODO: start a new game after game over
     TODO: fix ball speed and random direction stuff - speed should initially be
         fixed, but direction should be random, including negative values
 
@@ -137,9 +136,15 @@ int main(int argc, char* argv[])
             }
 
             //GAME WON CONDITION CHECK
-            if (p1Score == MAX_SCORE || p2Score == MAX_SCORE)
+            if (p1Score == MAX_SCORE)
             {
-                score.setString("GAME WON!!1");
+                score.setString("GAME OVER");
+                gameWon = true;
+            }
+
+            if (p2Score == MAX_SCORE)
+            {
+                score.setString("GAME WON");
                 gameWon = true;
             }
 
