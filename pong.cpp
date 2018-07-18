@@ -1,13 +1,8 @@
-/**
-    definitely:
-    TODO: make a paddle AI that is actually beatable, instead of precisely real-time
-        following the y-pos of the ball
-    TODO: fix ball speed and random direction stuff - speed should initially be
-        fixed, but direction should be random, including negative values
-    TODO: vary the reflection angle based on what part of the paddle is hit
-    TODO: ball speeds up with each volley - speed resets after point is scored
-    TODO: start a new game after game over
-*/
+// TODO: make a paddle AI that is actually beatable, instead of precisely real-time following the y-pos of the ball
+// TODO: fix ball speed and random direction stuff - speed should initially be fixed, but direction should be random, including negative values
+// TODO: vary the reflection angle based on what part of the paddle is hit
+// TODO: ball speeds up with each volley - speed resets after point is scored
+// TODO: start a new game after game over
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
@@ -65,7 +60,9 @@ int main(int argc, char* argv[])
     p2.setPosition(window.getSize().x * 0.9f, window.getSize().y / 2);
 
     int player_yPos = 0;
-    sf::Vector2f ballSpeed(rand() % 4 + 2, rand() % 4 + 2); // TODO: ballSpeed needs to be able to be negative, too
+
+    // initial ball speed
+    sf::Vector2f ballSpeed(rand() % 4 + 2, rand() % 4 + 2);
     /**
         Okay, so, what actually needs to be done here is to determine a fixed SPEED and randomly select a DIRECTION.
         If speed is going to be 4px/tick (random eg.), that needs to be Pythagrean'ed to determine the x speed and y speed
@@ -113,7 +110,7 @@ int main(int argc, char* argv[])
             p2.setPosition(window.getSize().x * 0.9f, player_yPos);
         }
 
-        // TODO: AI PADDLE MOVEMENT -  TEMPORARILY COMMENTED OUT TO GET SCORING ON BOTH SIDES
+        // AI Paddle movement
         //p1.setPosition(window.getSize().x * 0.1f, ball.getPosition().y);
 
         // collision detection with end walls
