@@ -5,7 +5,6 @@
     TODO: fix ball speed and random direction stuff - speed should initially be
         fixed, but direction should be random, including negative values
     TODO: vary the reflection angle based on what part of the paddle is hit
-    TODO: sound - "boink" noise on bounce
 
     maybe:
     TODO: ball speeds up with each volley - speed resets after point is scored
@@ -19,6 +18,7 @@
 */
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <string> // need to manipulate int scores into strings for display
 #include <time.h> // needed to seed PRNG
 
@@ -40,6 +40,12 @@ int main(int argc, char* argv[])
     p1Tex.loadFromFile("resources/paddle1.png");
     p2Tex.loadFromFile("resources/paddle2.png");
     ballTex.loadFromFile("resources/ball.png");
+
+    sf::SoundBuffer buffer;
+    buffer.loadFromFile("resources/hit.wav");
+
+    sf::Sound sound;
+    sound.setBuffer(buffer);
 
     sf::Font font;
     font.loadFromFile("resources/Lato-Regular.ttf");
@@ -165,6 +171,7 @@ int main(int argc, char* argv[])
         if ((ball.getGlobalBounds().intersects(p1.getGlobalBounds()) && ballSpeed.x < 0) || (ball.getGlobalBounds().intersects(p2.getGlobalBounds()) && ballSpeed.x > 0))
         {
             ballSpeed.x *= -1;
+            sound.play();
         }
 
         if (!gameWon)
