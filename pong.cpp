@@ -13,8 +13,6 @@
     TODO: implement framestep (per Game Programming Patterns - Game Loop chapter)
             http://gameprogrammingpatterns.com/game-loop.html#run,-run-as-fast-as-you-can
     TODO: start a new game after game over
-    TODO: refactor - OOP nonsense and seperate files
-    TODO: port to Android
 */
 
 #include <SFML/Graphics.hpp>
@@ -22,7 +20,7 @@
 #include <string> // need to manipulate int scores into strings for display
 #include <time.h> // needed to seed PRNG
 
-#define MAX_SCORE 3 // needs to be 11 - making it 3 for faster testing
+#define MAX_SCORE 11
 
 int main(int argc, char* argv[])
 {
@@ -41,11 +39,17 @@ int main(int argc, char* argv[])
     p2Tex.loadFromFile("resources/paddle2.png");
     ballTex.loadFromFile("resources/ball.png");
 
-    sf::SoundBuffer buffer;
-    buffer.loadFromFile("resources/hit.wav");
+    sf::SoundBuffer paddleBuffer;
+    paddleBuffer.loadFromFile("resources/hit.wav");
 
-    sf::Sound sound;
-    sound.setBuffer(buffer);
+    sf::SoundBuffer wallBuffer;
+    wallBuffer.loadFromFile("resources/hit2.wav");
+
+    sf::Sound paddleSound;
+    paddleSound.setBuffer(paddleBuffer);
+
+    sf::Sound wallSound;
+    wallSound.setBuffer(wallBuffer);
 
     sf::Font font;
     font.loadFromFile("resources/Lato-Regular.ttf");
@@ -165,13 +169,14 @@ int main(int argc, char* argv[])
         if (ball.getPosition().y + ballTex.getSize().y / 2 > window.getSize().y || ball.getPosition().y - ballTex.getSize().y / 2 < 0)
         {
             ballSpeed.y *= -1;
+            wallSound.play();
         }
 
         // collision detection and bounce off player paddles with "spear prevention" based on if current ballspeed.x is pos or neg
         if ((ball.getGlobalBounds().intersects(p1.getGlobalBounds()) && ballSpeed.x < 0) || (ball.getGlobalBounds().intersects(p2.getGlobalBounds()) && ballSpeed.x > 0))
         {
             ballSpeed.x *= -1;
-            sound.play();
+            paddleSound.play();
         }
 
         if (!gameWon)
