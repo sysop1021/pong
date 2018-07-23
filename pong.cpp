@@ -34,11 +34,17 @@ int main(int argc, char* argv[])
     sf::SoundBuffer wallBuffer;
     wallBuffer.loadFromFile("resources/hit2.wav");
 
+    sf::SoundBuffer scoreBuffer;
+    scoreBuffer.loadFromFile("resources/score.wav");
+
     sf::Sound paddleSound;
     paddleSound.setBuffer(paddleBuffer);
 
     sf::Sound wallSound;
     wallSound.setBuffer(wallBuffer);
+
+    sf::Sound scoreSound;
+    scoreSound.setBuffer(scoreBuffer);
 
     sf::Font font;
     font.loadFromFile("resources/Lato-Regular.ttf");
@@ -116,6 +122,8 @@ int main(int argc, char* argv[])
         // collision detection with end walls
         if (ball.getPosition().x + ballTex.getSize().x / 2 > window.getSize().x || ball.getPosition().x - ballTex.getSize().x / 2 < 0)
         {
+	    scoreSound.play();
+
             if (ballSpeed.x > 0) // hackish?
             {
                 p1Score++;
