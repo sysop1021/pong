@@ -9,7 +9,7 @@
 #include <string> // need to manipulate int scores into strings for display
 #include <time.h> // needed to seed PRNG
 
-#define MAX_SCORE 11
+#define MAX_SCORE 3
 
 int main(int argc, char* argv[])
 {
@@ -68,12 +68,8 @@ int main(int argc, char* argv[])
     int player_yPos = 0;
 
     // initial ball speed
-    sf::Vector2f ballSpeed(rand() % 4 + 2, rand() % 4 + 2);
-    /**
-        Okay, so, what actually needs to be done here is to determine a fixed SPEED and randomly select a DIRECTION.
-        If speed is going to be 4px/tick (random eg.), that needs to be Pythagrean'ed to determine the x speed and y speed
-        (independent of the speed going up with each volley)
-    */
+    sf::Vector2f ballSpeed((-4) + (rand() % 8), (-4) + (rand() % 8));
+    // sometimes too slow, and sometimes ball movement is too vertical
 
     int p1Score = 0, p2Score = 0;
     std:: string p1ScoreStr, p2ScoreStr, scoreStr;
