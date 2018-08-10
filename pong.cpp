@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
     // sometimes too slow, and sometimes ball movement is too vertical
 
     int p1Score = 0, p2Score = 0;
-    std:: string p1ScoreStr, p2ScoreStr, scoreStr;
+    std::string p1ScoreStr, p2ScoreStr, scoreStr;
 
     // GAME LOOP
     while (window.isOpen())
