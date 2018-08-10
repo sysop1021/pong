@@ -155,8 +155,8 @@ int main(int argc, char* argv[])
 
             // reset ball position and speed after score
             ball.setPosition(window.getSize().x / 2, window.getSize().y / 2);
-            ballSpeed.x = (rand() % 4 + 2);
-            ballSpeed.y = (rand() % 4 + 2);
+            ballSpeed.x = (-4) + (rand() % 8);
+            ballSpeed.y = (-4) + (rand() % 8);
 
         }
 
