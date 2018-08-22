@@ -5,8 +5,10 @@
 #include <SFML/Audio.hpp>
 #include <string> // need to manipulate int scores into strings for display
 #include <time.h> // needed to seed PRNG
+#include <chrono>
+#include <thread>
 
-#define MAX_SCORE 11
+#define MAX_SCORE 3
 
 int main(int argc, char* argv[])
 {
@@ -121,7 +123,7 @@ int main(int argc, char* argv[])
         }
 
         // AI Paddle movement
-        //p1.setPosition(window.getSize().x * 0.1f, ball.getPosition().y);
+        p1.setPosition(window.getSize().x * 0.1f, ball.getPosition().y);
 
         // collision detection with end walls
         if (ball.getPosition().x + ballTex.getSize().x / 2 > window.getSize().x || ball.getPosition().x - ballTex.getSize().x / 2 < 0)
@@ -194,6 +196,17 @@ int main(int argc, char* argv[])
         if (!gameWon)
         {
             ball.move(ballSpeed);
+        }
+
+        if (gameWon)
+        {
+            // sleep for a few seconds
+            std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+            // change score to 0 - 0
+            p1Score = 0;
+            p2Score = 0;
+            // set gameWon back to false
+            gameWon = false;
         }
     }
 
