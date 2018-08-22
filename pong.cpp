@@ -68,7 +68,18 @@ int main(int argc, char* argv[])
     int player_yPos = 0;
 
     // initial ball speed
-    sf::Vector2f ballSpeed((-4) + (rand() % 8), (-4) + (rand() % 8));
+    sf::Vector2f ballSpeed((rand() % 5), (rand() % 5));
+
+    if (rand() % 2 == 0)
+    {
+        ballSpeed.x *= -1;
+    }
+
+    if (rand() % 2 == 0)
+    {
+        ballSpeed.y *= -1;
+    }
+
     // sometimes too slow, and sometimes ball movement is too vertical
 
     int p1Score = 0, p2Score = 0;
@@ -155,8 +166,17 @@ int main(int argc, char* argv[])
 
             // reset ball position and speed after score
             ball.setPosition(window.getSize().x / 2, window.getSize().y / 2);
-            ballSpeed.x = (-4) + (rand() % 8);
-            ballSpeed.y = (-4) + (rand() % 8);
+            ballSpeed.x = (rand() % 5);
+            ballSpeed.y = (rand() % 5);
+            if (rand() % 2 == 0)
+            {
+                ballSpeed.x *= -1;
+            }
+
+            if (rand() % 2 == 0)
+            {
+                ballSpeed.y *= -1;
+            }
 
         }
 
