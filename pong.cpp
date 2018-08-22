@@ -1,6 +1,4 @@
 // TODO: make a paddle AI that is actually beatable, instead of precisely real-time following the y-pos of the ball
-// TODO: vary the reflection angle based on what part of the paddle is hit
-// TODO: ball speeds up with each volley - speed resets after point is scored
 // TODO: start a new game after game over
 
 #include <SFML/Graphics.hpp>
@@ -67,7 +65,7 @@ int main(int argc, char* argv[])
     int player_yPos = 0;
 
     // initial ball speed
-    sf::Vector2f ballSpeed((rand() % 5 + 2), (rand() % 5 + 2));
+    sf::Vector2f ballSpeed((rand() % 5 + 1), (rand() % 5 + 1));
 
     if (rand() % 2 == 0)
     {
@@ -165,8 +163,8 @@ int main(int argc, char* argv[])
 
             // reset ball position and speed after score
             ball.setPosition(window.getSize().x / 2, window.getSize().y / 2);
-            ballSpeed.x = (rand() % 5 + 2);
-            ballSpeed.y = (rand() % 5 + 2);
+            ballSpeed.x = (rand() % 5 + 1);
+            ballSpeed.y = (rand() % 5 + 1);
             if (rand() % 2 == 0)
             {
                 ballSpeed.x *= -1;
