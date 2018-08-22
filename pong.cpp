@@ -5,8 +5,6 @@
 #include <SFML/Audio.hpp>
 #include <string> // need to manipulate int scores into strings for display
 #include <time.h> // needed to seed PRNG
-#include <chrono>
-#include <thread>
 
 #define MAX_SCORE 3
 
@@ -196,17 +194,6 @@ int main(int argc, char* argv[])
         if (!gameWon)
         {
             ball.move(ballSpeed);
-        }
-
-        if (gameWon)
-        {
-            // sleep for a few seconds
-            std::this_thread::sleep_for(std::chrono::milliseconds(3000));
-            // change score to 0 - 0
-            p1Score = 0;
-            p2Score = 0;
-            // set gameWon back to false
-            gameWon = false;
         }
     }
 
