@@ -1,5 +1,4 @@
 // TODO: make a paddle AI that is actually beatable, instead of precisely real-time following the y-pos of the ball
-// TODO: fix ball speed and random direction stuff - speed should initially be fixed, but direction should be random, including negative values
 // TODO: vary the reflection angle based on what part of the paddle is hit
 // TODO: ball speeds up with each volley - speed resets after point is scored
 // TODO: start a new game after game over
@@ -9,7 +8,7 @@
 #include <string> // need to manipulate int scores into strings for display
 #include <time.h> // needed to seed PRNG
 
-#define MAX_SCORE 3
+#define MAX_SCORE 11
 
 int main(int argc, char* argv[])
 {
@@ -68,7 +67,7 @@ int main(int argc, char* argv[])
     int player_yPos = 0;
 
     // initial ball speed
-    sf::Vector2f ballSpeed((rand() % 5), (rand() % 5));
+    sf::Vector2f ballSpeed((rand() % 5 + 2), (rand() % 5 + 2));
 
     if (rand() % 2 == 0)
     {
@@ -166,8 +165,8 @@ int main(int argc, char* argv[])
 
             // reset ball position and speed after score
             ball.setPosition(window.getSize().x / 2, window.getSize().y / 2);
-            ballSpeed.x = (rand() % 5);
-            ballSpeed.y = (rand() % 5);
+            ballSpeed.x = (rand() % 5 + 2);
+            ballSpeed.y = (rand() % 5 + 2);
             if (rand() % 2 == 0)
             {
                 ballSpeed.x *= -1;
