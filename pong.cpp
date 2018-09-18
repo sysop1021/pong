@@ -76,6 +76,8 @@ int main(int argc, char* argv[])
         ballSpeed.y *= -1;
     }
 
+    float p1Speed = 3.f;
+
     // sometimes too slow, and sometimes ball movement is too vertical
 
     int p1Score = 0, p2Score = 0;
@@ -120,7 +122,20 @@ int main(int argc, char* argv[])
         }
 
         // AI Paddle movement
-        p1.setPosition(window.getSize().x * 0.1f, ball.getPosition().y);
+        if (ball.getPosition().y < p1.getPosition().y - p1Tex.getSize().y)
+        {
+            p1.move(0.f, -p1Speed);
+        }
+
+        else if (ball.getPosition().y > p1.getPosition().y + p1Tex.getSize().y)
+        {
+            p1.move(0.f, p1Speed);
+        }
+
+        else
+        {
+
+        }
 
         // collision detection with end walls
         if (ball.getPosition().x + ballTex.getSize().x / 2 > window.getSize().x || ball.getPosition().x - ballTex.getSize().x / 2 < 0)
