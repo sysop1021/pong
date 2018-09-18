@@ -1,5 +1,3 @@
-// TODO: make a paddle AI that is actually beatable, instead of precisely real-time following the y-pos of the ball
-
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <string> // need to manipulate int scores into strings for display
@@ -13,7 +11,6 @@ int main(int argc, char* argv[])
     srand(time(NULL));
 
     sf::RenderWindow window(sf::VideoMode(1024, 768), "Pong");
-    // window.setFramerateLimit(60);
 
     bool gameWon = false;
 
@@ -213,4 +210,3 @@ int main(int argc, char* argv[])
 
     return 0;
 }
-
